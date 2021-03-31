@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { browser } from 'protractor';
 import { ToDo } from 'src/app/models/ToDo';
+import { ToDoListService } from 'src/app/services/todolistservice.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -9,22 +11,10 @@ import { ToDo } from 'src/app/models/ToDo';
 export class ToDoListComponent implements OnInit {
   todos: ToDo[] = [];
 
-  constructor() { }
+  constructor(private todoservice: ToDoListService) {}
 
   ngOnInit(): void {
-    this.todos = [
-      {
-        id: 1,
-        text: 'ToDo number 1',
-        completed: false
-      },
-      {
-        id: 2,
-        text: 'ToDo number 2',
-        completed: true
-      }
-    ]
-
+    this.todoservice.getTodos().subscribe(todos => {this.todos = todos})
     console.log(this.todos);
   }
 

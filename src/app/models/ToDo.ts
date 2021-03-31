@@ -1,5 +1,5 @@
 export class ToDo {
     id!: number;
-    text!: string;
-    completed!: boolean;
+    title!: string;
+    isComplete!: boolean;
 }
